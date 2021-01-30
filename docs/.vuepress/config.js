@@ -15,7 +15,7 @@ var sidebarArray = dirs.map((dir) => {
       if (base == "README") {
         return false;
       } else {
-        return ["/" + dir + "/" + base, base];
+        return "/" + dir + "/" + base;
       }
     }).filter((f) => {
       // 各ディレクトリのindexページは一覧に含めない

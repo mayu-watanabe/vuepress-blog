@@ -3,7 +3,7 @@
     <slot name="top" />
     <Content class="theme-default-content" />
     <div v-for="(item, i) in posts" class="list theme-default-content">
-      <a href="item.path">{{item.title}}</a>
+      <a v-bind:href="item.path">{{item.title}}</a>
     </div>
     <slot name="bottom" />
   </main>
