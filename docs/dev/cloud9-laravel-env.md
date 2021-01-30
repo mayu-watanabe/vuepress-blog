@@ -1,42 +1,57 @@
 ---
-title: [AWS]Cloud9を使ったLaravel環境構築
+title: "[AWS]Cloud9を使ったLaravel環境構築"
 date: 2021-01-31
 description: Cloud9を使ったLaravel環境構築手順のメモ。
 category: dev
-tags: ['aws','cloud9','laravel']
+tags: ["aws", "cloud9", "laravel"]
 ---
 
 # {{ $frontmatter.title }}
 
-### AWSアカウントを作成する
-Cloud９の利用は無料ですが、サーバーをたてるとサーバーの使用料がかかる。登録から12ヶ月間は自動で無料枠が付与されるので、詳しい料金は公式サイトを参考に。
+{{ $frontmatter.description }}
 
-### AWS Cloud 9上に新たな環境を作成
-アカウントを作成したら、Cloud9で環境を作成。
-1. create environmentをクリック
-![](https://i.imgur.com/gA8370m.png)
+## 目次
 
-2. Nameで適当に名前つけて、次に進む
-![](https://i.imgur.com/OqsPLme.png)
+[[toc]]
 
-3. Configure settingsはデフォルトのままでいいので、そのまま次へ進む
+## 手順
+
+### AWS アカウントを作成する
+
+Cloud ９の利用は無料ですが、サーバーをたてるとサーバーの使用料がかかる。登録から 12 ヶ月間は自動で無料枠が付与されるので、詳しい料金は公式サイトを参考に。
+
+### AWS Cloud 9 上に新たな環境を作成
+
+アカウントを作成したら、Cloud9 で環境を作成。
+
+1. create environment をクリック
+   ![](https://i.imgur.com/gA8370m.png)
+
+2. Name で適当に名前つけて、次に進む
+   ![](https://i.imgur.com/OqsPLme.png)
+
+3. Configure settings はデフォルトのままでいいので、そのまま次へ進む
 4. [create environment]を押して、環境が作成される。
 5. 環境作成されると、こんな画面に。
-![](https://i.imgur.com/HaCOMeg.png)
-左側がフォルダ構成、ファイルクリックすると画面中央に表示されます（今AWS Cloud9と表示されているところ）。下にあるのがコマンド操作部分（ec2-user:~/environment $ と表示されているところ）。
+   ![](https://i.imgur.com/HaCOMeg.png)
+   左側がフォルダ構成、ファイルクリックすると画面中央に表示されます（今 AWS Cloud9 と表示されているところ）。下にあるのがコマンド操作部分（ec2-user:~/environment \$ と表示されているところ）。
 
 次から、コマンドラインで環境構築していく。
 
-### PHPのバージョンを7.1に上げる
-PHPのバージョン確認。
+### PHP のバージョンを 7.1 に上げる
+
+PHP のバージョン確認。
+
 ```
 $ php -v
-PHP 5.6.40 (cli) (built: Oct 31 2019 20:35:16) 
+PHP 5.6.40 (cli) (built: Oct 31 2019 20:35:16)
 Copyright (c) 1997-2016 The PHP Group
 Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
     with Xdebug v2.5.5, Copyright (c) 2002-2017, by Derick Rethans
 ```
-デフォルトのPHPのバージョンが5.6なので、7.1にあげる。下記のコマンドを実行。
+
+デフォルトの PHP のバージョンが 5.6 なので、7.1 にあげる。下記のコマンドを実行。
+
 ```
 $ sudo yum -y update
 $ sudo yum -y install php71 php71-mbstring php71-pdo php71-intl php71-pdo_mysql php71-pdo_pgsql php71-xdebug php71-opcache php71-apcu
@@ -44,8 +59,9 @@ $ sudo unlink /usr/bin/php
 $ sudo ln -s /etc/alternatives/php7 /usr/bin/php
 ```
 
-↑2行目でmysqlのPDOドライバをインストールしている。
-cloud9でのlaravel環境構築を紹介している記事で、エラーになる場合があって、それがこのドライバがインストールされていないのが原因だった。デフォルトだと、`pdo_sqlite`しか入っていない。
+↑2 行目で mysql の PDO ドライバをインストールしている。
+cloud9 での laravel 環境構築を紹介している記事で、エラーになる場合があって、それがこのドライバがインストールされていないのが原因だった。デフォルトだと、`pdo_sqlite`しか入っていない。
+
 ```
 $ php -m | grep pdo #ドライバの確認
 pdo_mysql
@@ -53,7 +69,8 @@ pdo_pgsql
 pdo_sqlite
 ```
 
-### Composerのインストール
+### Composer のインストール
+
 ```
 $ curl -sS https://getcomposer.org/installer | php
 $ sudo mv composer.phar /usr/local/bin/composer
@@ -61,32 +78,38 @@ $ sudo mv composer.phar /usr/local/bin/composer
 $ composer #確認用：composerの大きな文字が表示されてればOK
 ```
 
-### laravelのインストール
+### laravel のインストール
+
 ```
 $ composer global require "laravel/installer"
 ```
-メモリ不足でインストールができない時（composerコマンドでエラーになる）
+
+メモリ不足でインストールができない時（composer コマンドでエラーになる）
 https://qiita.com/takaaki-mizuno/items/fc1b9ef513609cab7eb9
 
-### laravelプロジェクトの作成
+### laravel プロジェクトの作成
+
 ```
 $ composer create-project laravel/laravel [プロジェクト名]
 ```
+
 バージョンを指定しない場合、最新バージョンで作成される。指定する場合は、プロジェクト名の後に例えば`5.5.*`などとつけて指定する。
 
 ```
 ec2-user:~/environment $ ls
 laravel-tdd  README.md
 ```
-environment直下に、プロジェクト（laravel-tdd）が作成されている。
 
-### mysqlのバージョンをあげる
+environment 直下に、プロジェクト（laravel-tdd）が作成されている。
+
+### mysql のバージョンをあげる
 
 ```
 ec2-user:~/environment $ mysql --version
 mysql  Ver 14.14 Distrib 5.5.62, for Linux (x86_64) using readline 5.1
 ```
-↑デフォルトだと5.5で、migrationでエラーになることがあるので、バージョンをあげる。下記コマンドを実行。
+
+↑ デフォルトだと 5.5 で、migration でエラーになることがあるので、バージョンをあげる。下記コマンドを実行。
 
 ```
 $ sudo service mysqld stop
@@ -95,8 +118,10 @@ $ sudo yum -y install mysql57-server mysql57
 $ sudo service mysqld start
 ```
 
-### mysqlでDBを作成する
-mysqlにログイン。パスワードは空白のままでエンター。
+### mysql で DB を作成する
+
+mysql にログイン。パスワードは空白のままでエンター。
+
 ```
 ec2-user:~/environment $ mysql -uroot -p
 Enter password: #空欄
@@ -112,9 +137,10 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> 
+mysql>
 ```
-プロジェクト用のDBを作成する。今回はsampleという名前で作成。
+
+プロジェクト用の DB を作成する。今回は sample という名前で作成。
 
 ```
 mysql> show databases;
@@ -143,10 +169,12 @@ mysql> show databases;
 +--------------------+
 5 rows in set (0.00 sec)
 ```
+
 作成された。
 
-### laravelの環境ファイルのDB設定を変更する
-exitでmysqlから一旦ログアウト。プロジェクト下に移動し、`.env`という隠しファイルがあるので、それを編集する。
+### laravel の環境ファイルの DB 設定を変更する
+
+exit で mysql から一旦ログアウト。プロジェクト下に移動し、`.env`という隠しファイルがあるので、それを編集する。
 
 ```
 ec2-user:~/environment $ ls
@@ -157,10 +185,13 @@ ec2-user:~/environment/laravel-tdd $ ls -a
 ..   bootstrap      config         .env           .gitignore      public       routes      .styleci.yml  webpack.mix.js
 app  composer.json  database       .env.example   package.json    readme.md    server.php  tests
 ```
-![](https://i.imgur.com/iQgT17h.png)
+
+<img src="https://i.imgur.com/iQgT17h.png" width="400px">
+
 ファイル構成欄の歯車マークをクリックすると、[show hidden files]という部分があるので、ここにチェックを入れると隠しファイルも表示される。`.env`ファイルを開く。
 
-DBの設定のところを、下記のように書き換える。
+DB の設定のところを、下記のように書き換える。
+
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -170,7 +201,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-保存したら、artisanコマンドでmigrateできるか確認してみる。
+保存したら、artisan コマンドで migrate できるか確認してみる。
 
 ```
 ec2-user:~/environment/laravel-tdd $ php artisan migrate
@@ -179,9 +210,11 @@ Migrating: 2014_10_12_000000_create_users_table
 Migrated:  2014_10_12_000000_create_users_table (0.06 seconds)
 Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table (0.03 seconds)
-ec2-user:~/environment/laravel-tdd $ 
+ec2-user:~/environment/laravel-tdd $
 ```
-↑こんな感じで実行できれば、DBとの紐付けが成功している。先ほど作ったDBをみてみると、新しくテーブルが作成されている。
+
+↑ こんな感じで実行できれば、DB との紐付けが成功している。先ほど作った DB をみてみると、新しくテーブルが作成されている。
+
 ```
 mysql> use sample
 Reading table information for completion of table and column names
@@ -198,9 +231,8 @@ mysql> show tables;
 +------------------+
 3 rows in set (0.01 sec)
 
-mysql> 
+mysql>
 ```
-
 
 最後に、ブラウザで表示確認してみる。まず、ローカルサーバーをたてて、
 
@@ -208,11 +240,10 @@ mysql>
 ec2-user:~/environment/laravel-tdd $ php artisan serve --port=8080
 Laravel development server started: <http://127.0.0.1:8080>
 ```
+
 [preview running application]をクリックすると、ブラウザが開きます。
 
 ![](https://i.imgur.com/iJ3pFR4.png)
 
-laravelの画面が表示されてたらOK！
+laravel の画面が表示されてたら OK！
 ![](https://i.imgur.com/onfw0TF.png)
-
-
