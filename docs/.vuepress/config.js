@@ -2,8 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 var dirpath = "./docs";
+var exclude = ["about"];
 var dirs = fs.readdirSync(dirpath).filter((f) => {
-  return fs.existsSync(dirpath + "/" + f) && fs.statSync(dirpath + "/" + f).isDirectory() && !f.startsWith('.');
+  return fs.existsSync(dirpath + "/" + f)
+    && fs.statSync(dirpath + "/" + f).isDirectory()
+    && !f.startsWith('.')
+    && !exclude.includes(f);
 })
 var sidebarArray = dirs.map((dir) => {
     var childrenArr = fs.readdirSync(dirpath + "/" + dir).map((childDir) => {
@@ -34,10 +38,10 @@ module.exports = {
   title: 'urania.',
   description: 'daily logs',
   themeConfig: {
-    // nav: [
-    //   { text: 'Home', link: '/' },
-    //   { text: 'Dev', link: '/dev/' },
-    // ],
+    nav: [
+      { text: 'Home', link: '/' },
+      { text: 'About', link: '/about/' },
+    ],
     sidebar: sidebarArray,
     displayAllHeaders: false,
   },
