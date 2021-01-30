@@ -2,8 +2,10 @@
   <main class="page">
     <slot name="top" />
     <Content class="theme-default-content" />
-    <div v-for="(item, i) in posts" class="list theme-default-content">
+    <div class="list">
+      <div v-for="(item, i) in posts" class="list-item">
       <a v-bind:href="item.path">{{item.title}}</a>
+      </div>
     </div>
     <slot name="bottom" />
   </main>
@@ -32,5 +34,11 @@ export default {
   display block
 
 .list 
-  padding 0.5rem 2rem
+  max-width: 740px
+  margin: 0 auto
+  padding: 2rem 2.5rem
+
+.list-item {
+  padding: 0.4rem
+}
 </style>
