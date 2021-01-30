@@ -5,8 +5,7 @@ var dirpath = "./docs";
 var dirs = fs.readdirSync(dirpath).filter((f) => {
   return fs.existsSync(dirpath + "/" + f) && fs.statSync(dirpath + "/" + f).isDirectory() && !f.startsWith('.');
 })
-var sidebarArray = ["/"].concat(
-  dirs.map((dir) => {
+var sidebarArray = dirs.map((dir) => {
     var childrenArr = fs.readdirSync(dirpath + "/" + dir).map((childDir) => {
       // ファイル名の取得
       var base = new String(childDir).substring(childDir.lastIndexOf('/') + 1);
@@ -29,17 +28,17 @@ var sidebarArray = ["/"].concat(
       sidebarDepth: 1,
       children: childrenArr
     }
-  }));
+  });
 
 module.exports = {
   title: 'urania.',
   description: 'daily logs',
   themeConfig: {
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Dev', link: '/dev/' },
-    ],
+    // nav: [
+    //   { text: 'Home', link: '/' },
+    //   { text: 'Dev', link: '/dev/' },
+    // ],
     sidebar: sidebarArray,
-    displayAllHeaders: true,
+    displayAllHeaders: false,
   },
 }

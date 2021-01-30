@@ -1,5 +1,5 @@
 ---
-title: DEV
+title: 3DCG
 postList: true
 hideList: true
 ---
