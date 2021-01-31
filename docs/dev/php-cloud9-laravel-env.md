@@ -1,5 +1,5 @@
 ---
-title: "[AWS]Cloud9を使ったLaravel環境構築"
+title: "[PHP/AWS]Cloud9を使ったLaravel環境構築"
 date: 2021-01-31
 description: Cloud9を使ったLaravel環境構築手順のメモ。
 category: dev
@@ -14,13 +14,11 @@ tags: ["aws", "cloud9", "laravel"]
 
 [[toc]]
 
-## 手順
-
-### AWS アカウントを作成する
+## AWS アカウントを作成する
 
 Cloud ９の利用は無料ですが、サーバーをたてるとサーバーの使用料がかかる。登録から 12 ヶ月間は自動で無料枠が付与されるので、詳しい料金は公式サイトを参考に。
 
-### AWS Cloud 9 上に新たな環境を作成
+## AWS Cloud 9 上に新たな環境を作成
 
 アカウントを作成したら、Cloud9 で環境を作成。
 
@@ -38,7 +36,7 @@ Cloud ９の利用は無料ですが、サーバーをたてるとサーバー�
 
 次から、コマンドラインで環境構築していく。
 
-### PHP のバージョンを 7.1 に上げる
+## PHP のバージョンを 7.1 に上げる
 
 PHP のバージョン確認。
 
@@ -69,7 +67,7 @@ pdo_pgsql
 pdo_sqlite
 ```
 
-### Composer のインストール
+## Composer のインストール
 
 ```
 $ curl -sS https://getcomposer.org/installer | php
@@ -78,16 +76,17 @@ $ sudo mv composer.phar /usr/local/bin/composer
 $ composer #確認用：composerの大きな文字が表示されてればOK
 ```
 
-### laravel のインストール
+## laravel のインストール
 
 ```
 $ composer global require "laravel/installer"
 ```
 
-メモリ不足でインストールができない時（composer コマンドでエラーになる）
-https://qiita.com/takaaki-mizuno/items/fc1b9ef513609cab7eb9
+メモリ不足でインストールができない時（composer コマンドでエラーになる）は下記の記事を参考にさせていただいた。
 
-### laravel プロジェクトの作成
+[EC2 の micro instance で composer update がコケる場合のメモ](https://qiita.com/takaaki-mizuno/items/fc1b9ef513609cab7eb9)
+
+## laravel プロジェクトの作成
 
 ```
 $ composer create-project laravel/laravel [プロジェクト名]
@@ -102,7 +101,7 @@ laravel-tdd  README.md
 
 environment 直下に、プロジェクト（laravel-tdd）が作成されている。
 
-### mysql のバージョンをあげる
+## mysql のバージョンをあげる
 
 ```
 ec2-user:~/environment $ mysql --version
@@ -118,7 +117,7 @@ $ sudo yum -y install mysql57-server mysql57
 $ sudo service mysqld start
 ```
 
-### mysql で DB を作成する
+## mysql で DB を作成する
 
 mysql にログイン。パスワードは空白のままでエンター。
 
