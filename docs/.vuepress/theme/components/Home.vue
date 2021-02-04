@@ -4,25 +4,12 @@
     :aria-labelledby="data.heroText !== null ? 'main-title' : null"
   >
     <header class="hero">
-      <img
-        v-if="data.heroImage"
-        :src="$withBase(data.heroImage)"
-        :alt="data.heroAlt || 'hero'"
-      >
-
       <h1
         v-if="data.heroText !== null"
         id="main-title"
       >
         {{ data.heroText || $title || 'Hello' }}
       </h1>
-
-      <p
-        v-if="data.tagline !== null"
-        class="description"
-      >
-        {{ data.tagline || $description || 'Welcome to your VuePress site' }}
-      </p>
 
       <p
         v-if="data.actionText && data.actionLink"
@@ -49,7 +36,13 @@
       </div>
     </div>
 
-    <Content class="theme-default-content custom" />
+    <div class="theme-default-content">
+      <div v-for="(post, index) in posts" class="post">
+        <span>{{ date(post.frontmatter.date) }}</span>
+        <a :href="post.regularPath"><h3>{{ post.title }}</h3></a>
+        <p>{{ post.frontmatter.description }}</p>
+      </div>
+    </div>
 
     <div
       v-if="data.footer"
@@ -62,6 +55,7 @@
 
 <script>
 import NavLink from '@theme/components/NavLink.vue'
+import { getNowDateWithString } from '../util'
 
 export default {
   name: 'Home',
@@ -78,12 +72,28 @@ export default {
         link: this.data.actionLink,
         text: this.data.actionText
       }
+    },
+
+    posts() {
+      return this.$site.pages.filter(post => {
+        var filename = post.relativePath.match(/([^/]+)\./)[1];
+        return filename != 'README';
+        });
+    },
+
+    date: function() {
+      return function(date) {
+        var timestamp = Date.parse(date);
+        return getNowDateWithString(timestamp);
+      }
     }
   }
 }
 </script>
 
 <style lang="stylus">
+.post
+  padding 1rem 0
 .home
   padding $navbarHeight 2rem 0
   max-width $homePageWidth

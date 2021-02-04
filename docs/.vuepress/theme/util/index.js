@@ -242,3 +242,17 @@ function resolveItem (item, pages, base, groupDepth = 1) {
     }
   }
 }
+
+/**
+ * convert timestamp to display date
+ * 
+ * @param int timestamp 
+ */
+export function getNowDateWithString (timestamp) {
+  var dt = new Date(timestamp);
+  var y = dt.getFullYear();
+  var m = ("00" + (dt.getMonth() + 1)).slice(-2);
+  var d = ("00" + dt.getDate()).slice(-2);
+  var result = y + "-" + m + "-" + d;
+  return result;
+}

@@ -1,1 +1,4 @@
-# Urania
+---
+title: Urania
+home: true
+---
