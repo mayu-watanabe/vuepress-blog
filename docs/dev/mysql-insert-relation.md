@@ -1,6 +1,6 @@
 ---
 title: "[MySQL]親子関係にある2つのテーブルにinsertしたい"
-date: 2020-02-05
+date: 2021-02-05
 description: "親テーブルと、その親のIDをカラムにもつ子テーブルの2つのテーブルにトランザクションで一気にinsertしたい時。"
 category: dev
 tags: ["mysql"]

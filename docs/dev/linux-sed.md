@@ -1,6 +1,6 @@
 ---
 title: "[Linux]sedの備忘録"
-date: 2020-01-31
+date: 2021-01-31
 description: "sedを使ってデータの一括置き換えをしたい時のための備忘録。"
 category: dev
 tags: ["linux"]

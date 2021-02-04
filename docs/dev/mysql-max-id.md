@@ -1,6 +1,6 @@
 ---
 title: "[MySQL]1対多のテーブル構造でgorup byで取得する時に最新のレコードをJOINしたい"
-date: 2020-01-31
+date: 2021-01-31
 description: "1対多のテーブル構造でgorup byで取得する時に最新のレコードをJOINしたい場合のSQL。"
 category: dev
 tags: ["mysql"]

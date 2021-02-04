@@ -1,6 +1,6 @@
 ---
 title: "[MySQL]id一覧をカンマ区切りで取得したい"
-date: 2020-01-31
+date: 2021-01-31
 description: "SQL文を作成する際に、コンマ区切りのidが欲しい時など。"
 category: dev
 tags: ["mysql"]
