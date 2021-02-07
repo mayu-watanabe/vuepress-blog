@@ -78,6 +78,11 @@ export default {
       return this.$site.pages.filter(post => {
         var filename = post.relativePath.match(/([^/]+)\./)[1];
         return filename != 'README';
+        })
+        .sort(function(a, b) {
+          if(a.frontmatter.date < b.frontmatter.date) return 1;
+          if(a.frontmatter.date > b.frontmatter.date) return -1;
+          return 0;
         });
     },
 
