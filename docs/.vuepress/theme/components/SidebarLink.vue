@@ -43,14 +43,15 @@ export default {
     const displayAllHeaders = $themeLocaleConfig.displayAllHeaders
       || $themeConfig.displayAllHeaders
 
-    if (item.type === 'auto') {
-      return [link, renderChildren(h, item.children, item.basePath, $route, maxDepth)]
-    } else if ((active || displayAllHeaders) && item.headers && !hashRE.test(item.path)) {
-      const children = groupHeaders(item.headers)
-      return [link, renderChildren(h, children, item.path, $route, maxDepth)]
-    } else {
-      return link
-    }
+    // if (item.type === 'auto') {
+    //   return [link, renderChildren(h, item.children, item.basePath, $route, maxDepth)]
+    // } else if ((active || displayAllHeaders) && item.headers && !hashRE.test(item.path)) {
+    //   const children = groupHeaders(item.headers)
+    //   return [link, renderChildren(h, children, item.path, $route, maxDepth)]
+    // } else {
+    //   return link
+    // }
+    return link
   }
 }
 
