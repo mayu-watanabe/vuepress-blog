@@ -5,7 +5,7 @@
   >
     <li
       v-for="(item, i) in items"
-      :key="i"
+      :key="i" 
     >
       <SidebarGroup
         v-if="item.type === 'group'"
@@ -101,3 +101,8 @@ function descendantIsActive (route, item) {
   return false
 }
 </script>
+
+<style lang="stylus">
+.group-title
+  font-family $fontFamilyTitle
+</style>

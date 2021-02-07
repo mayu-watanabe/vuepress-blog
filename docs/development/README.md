@@ -1,6 +1,6 @@
 ---
-title: 3DCG
+title: DEVELOPMENT
 postList: true
 hideList: true
-sort: 20
+sort: 10
 ---

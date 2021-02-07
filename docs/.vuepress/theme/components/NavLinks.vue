@@ -125,8 +125,10 @@ export default {
 <style lang="stylus">
 .nav-links
   display inline-block
+  font-family $fontFamilyTitle
   a
-    line-height 1.4rem
+    line-height 1.3rem
+    font-weight 600
     color $textColorLight
     &:hover, &.router-link-active
       color $accentColor

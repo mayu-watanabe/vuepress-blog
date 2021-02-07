@@ -3,6 +3,7 @@
     <slot name="top" />
     <Content class="theme-default-content" />
     <div class="list">
+      <h1 class="list-title">{{ data.title }}</h1>
       <div v-for="(item, i) in posts" class="list-item">
       <a v-bind:href="item.path">{{item.title}}</a>
       </div>
@@ -14,6 +15,10 @@
 <script>
 export default {
   computed: {
+    data () {
+      return this.$page.frontmatter;
+    },
+
     posts() {
       return this.$site.pages
       // ディレクトリ以下を投稿記事一覧表示の対象とする
@@ -37,8 +42,12 @@ export default {
   max-width: 740px
   margin: 0 auto
   padding: 2rem 2.5rem
-
-.list-item {
-  padding: 0.4rem
+  .list-title
+    padding: 0 0 3rem 0
+    text-align center
+    font-family $fontFamilyTitle
+    letter-spacing 0.35rem
+  .list-item {
+   padding: 0.4rem
 }
 </style>

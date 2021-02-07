@@ -1,6 +1,6 @@
 ---
-title: 3DCG
+title: DAILY
 postList: true
 hideList: true
-sort: 20
+sort: 30
 ---

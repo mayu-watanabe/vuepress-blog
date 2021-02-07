@@ -1,7 +1,0 @@
----
-title: DEV
-postList: true
-hideList: true
----
-
-# {{ $frontmatter.title }}

@@ -31,8 +31,11 @@ var sidebarArray = dirs.map((dir) => {
       collapsable: true,
       sidebarDepth: 1,
       children: childrenArr
-    }
-  });
+  }
+}).filter((f) => {
+  // README.md以外の記事が存在しない場合、サイドバー非表示
+  return f.children.length
+});
 
 module.exports = {
   title: 'urania.',

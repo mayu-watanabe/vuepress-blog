@@ -114,6 +114,8 @@ export default {
   cursor pointer
   font-size 1.1em
   font-weight bold
+  font-family $fontFamilyTitle
+  letter-spacing 0.2rem
   // text-transform uppercase
   padding 0.35rem 1.5rem 0.35rem 1.25rem
   width 100%

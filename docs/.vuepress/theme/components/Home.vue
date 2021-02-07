@@ -106,6 +106,8 @@ export default {
   display block
   .hero
     text-align center
+    #main-title
+      margin-top 6.8rem
     img
       max-width: 100%
       max-height 280px
@@ -113,6 +115,8 @@ export default {
       margin 3rem auto 1.5rem
     h1
       font-size 3rem
+      font-family $fontFamilyTitle
+      letter-spacing 0.4rem
     h1, .description, .action
       margin 1.8rem auto
     .description
