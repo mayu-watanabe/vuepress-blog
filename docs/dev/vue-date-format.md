@@ -1,7 +1,7 @@
 ---
-title: "[Vue]frontmatterの日付を年月日の表示へ整形する"
+title: "[Vue/Vuepress]frontmatterの日付を年月日の表示へ整形する"
 date: 2021-02-07
-description: frontmatterで定義されている各記事の日時を表示させる方法。
+description: Vuepress(Vue)のfrontmatterで定義されている各記事の日時を表示させる方法。
 category: dev
 tags: ["vue"]
 ---

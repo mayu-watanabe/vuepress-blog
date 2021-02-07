@@ -25,7 +25,7 @@ tags: []
 ```php
 <body>
   <div class="flex-center position-ref full-height">
-    <?-- This is HTML Comment -->
+    <!-- This is HTML Comment -->
       <div class="content">
           <div class="title m-b-md">
               Hello World
