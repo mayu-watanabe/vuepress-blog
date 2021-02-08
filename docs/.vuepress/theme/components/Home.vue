@@ -99,6 +99,8 @@ export default {
 <style lang="stylus">
 .post
   padding 1rem 0
+  h3 
+    font-size: 1.2em
 .home
   padding $navbarHeight 2rem 0
   max-width $homePageWidth

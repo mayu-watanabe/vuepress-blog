@@ -124,7 +124,8 @@ a.sidebar-link
     color $sidebarTextColor
     border-left-color $sidebarTextColor
   .sidebar-group &
-    padding-left 2rem
+    // padding-left 2rem
+    font-size: 0.97em
   .sidebar-sub-headers &
     padding-top 0.25rem
     padding-bottom 0.25rem
