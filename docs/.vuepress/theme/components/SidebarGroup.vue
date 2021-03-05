@@ -45,7 +45,7 @@
       <SidebarLinks
         v-if="open || !collapsable"
         class="sidebar-group-items"
-        :items="item.children"
+        :items="item.children.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date))"
         :sidebar-depth="item.sidebarDepth"
         :initial-open-group-index="item.initialOpenGroupIndex"
         :depth="depth + 1"
