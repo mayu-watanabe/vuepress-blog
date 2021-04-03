@@ -47,5 +47,9 @@ module.exports = {
     ],
     sidebar: sidebarArray,
     displayAllHeaders: false,
+    
   },
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ]
 }
