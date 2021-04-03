@@ -17,7 +17,14 @@ import PageNav from '@theme/components/PageNav.vue'
 
 export default {
   components: { PageEdit, PageNav },
-  props: ['sidebarItems']
+  props: ['sidebarItems'],
+  mounted() {
+    const list = document.getElementsByClassName("extra-class");
+    list.forEach(element => {
+      let className = element.className.match(/\blanguage-\S+/g).join(' ').replace("language-", "");
+      element.dataset.lang = className;
+    });
+  }
 }
 </script>
 

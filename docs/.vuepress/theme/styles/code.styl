@@ -103,6 +103,10 @@ for lang in $codeLang
     &:before
       content ('' + lang)
 
+div[class^="language-"]
+  &:before
+    content (attr(data-lang))
+
 div[class~="language-javascript"]
   &:before
     content "js"
