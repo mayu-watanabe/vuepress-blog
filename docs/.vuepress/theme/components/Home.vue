@@ -31,12 +31,14 @@
         :key="index"
         class="feature"
       >
-        <h2>{{ feature.title }}</h2>
+        <h2 @click="home">{{ feature.title }}</h2>
         <p>{{ feature.details }}</p>
       </div>
     </div>
 
     <div class="theme-default-content">
+      <Tags :filter="filter" :posts="posts" />
+      <h2>{{ selectedTag }}</h2>
       <div v-for="(post, index) in posts" class="post">
         <span>{{ date(post.frontmatter.date) }}</span>
         <a :href="post.regularPath"><h3>{{ post.title }}</h3></a>
@@ -55,12 +57,32 @@
 
 <script>
 import NavLink from '@theme/components/NavLink.vue'
+import Tags from '@theme/components/Tags.vue'
 import { getNowDateWithString } from '../util'
 
 export default {
   name: 'Home',
 
-  components: { NavLink },
+  components: { NavLink, Tags },
+
+  data() {
+    return {
+      posts: [],
+      selectedTag: '# posts'
+    }
+  },
+
+  mounted() {
+    this.posts = this.$site.pages.filter(post => {
+      let filename = post.relativePath.match(/([^/]+)\./)[1];
+      return filename != 'README';
+      })
+      .sort(function(a, b) {
+        if(a.frontmatter.date < b.frontmatter.date) return 1;
+        if(a.frontmatter.date > b.frontmatter.date) return -1;
+        return 0;
+      }); 
+  },
 
   computed: {
     data () {
@@ -74,24 +96,28 @@ export default {
       }
     },
 
-    posts() {
-      return this.$site.pages.filter(post => {
-        var filename = post.relativePath.match(/([^/]+)\./)[1];
-        return filename != 'README';
-        })
-        .sort(function(a, b) {
-          if(a.frontmatter.date < b.frontmatter.date) return 1;
-          if(a.frontmatter.date > b.frontmatter.date) return -1;
-          return 0;
-        });
-    },
-
     date: function() {
       return function(date) {
         var timestamp = Date.parse(date);
         return getNowDateWithString(timestamp);
       }
-    }
+    },
+
+    filterPosts: {
+      get: function() {
+        return this.posts;
+      },
+      set: function(value) {
+        this.posts = value;
+      }
+    },
+  },
+
+  methods: {
+    filter (value, index) {
+      this.selectedTag = '# ' + index;
+      this.$set(this, 'posts', value);
+    },
   }
 }
 </script>
