@@ -32,7 +32,7 @@ export default {
       let array = Object.keys(tags).map((k)=>({ key: k, value: tags[k] }));
 
       // 記事数が多い順に並び替え
-      array.sort((a, b) => a.length - b.length);
+      array.sort((a, b) =>  b.value.length - a.value.length);
       tags = Object.assign({}, ...array.map((item) => ({
           [item.key]: item.value,
       })));
@@ -69,9 +69,7 @@ export default {
       color: white;
       background-color: black;
 
-    &.selected {
+    &.selected
       color: white;
       background-color: black
-    }
-
 </style>
