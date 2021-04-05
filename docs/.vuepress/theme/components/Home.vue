@@ -8,7 +8,7 @@
         v-if="data.heroText !== null"
         id="main-title"
       >
-        {{ data.heroText || $title || 'Hello' }}
+        <a :href="$site.base">{{ data.heroText || $title || 'Hello' }}</a>
       </h1>
 
       <p
@@ -31,7 +31,7 @@
         :key="index"
         class="feature"
       >
-        <h2 @click="home">{{ feature.title }}</h2>
+        <h2>{{ feature.title }}</h2>
         <p>{{ feature.details }}</p>
       </div>
     </div>
