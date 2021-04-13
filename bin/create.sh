@@ -19,7 +19,7 @@ targetDir=/Users/mayuwatanabe/workspace/documents/dev-blog/docs
 # [[toc]]
 
 # ファイルを作成するディレクトリ一覧
-DIR_LIST="daily development 3dcg"
+DIR_LIST="frontend backend daily 3dcg"
 
 echo "which directory? "
 select DIR in $DIR_LIST
