@@ -10,12 +10,7 @@
 <script>
 export default {
   name: 'Tags',
-  props: ['posts', 'filter'],
-  data() {
-    return {
-      isSelected: ''
-    }
-  },
+  props: ['posts', 'filter', 'isSelected'],
   computed: {
     tags() {
       let tags = {};
@@ -39,11 +34,17 @@ export default {
 
       return tags;
     },
+
   },
   methods: {
     clicked(index) {
-      this.isSelected = index;
-      this.filter(this.tags[index], index);
+      const tagPosts = this.tags[index].sort(function(a, b) {
+        if(a.frontmatter.date < b.frontmatter.date) return 1;
+        if(a.frontmatter.date > b.frontmatter.date) return -1;
+        return 0;
+      }); 
+      this.$emit('click-tag', index);
+      this.filter(tagPosts, index);
     }
   }
 }

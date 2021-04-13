@@ -8,7 +8,7 @@
         v-if="data.heroText !== null"
         id="main-title"
       >
-        <a :href="$site.base">{{ data.heroText || $title || 'Hello' }}</a>
+        <span @click="filter(allPosts)">{{ data.heroText || $title || 'Hello' }}</span>
       </h1>
 
       <p
@@ -37,12 +37,16 @@
     </div>
 
     <div class="theme-default-content">
-      <Tags :filter="filter" :posts="posts" />
+      <Tags :filter="filter" :posts="posts" :isSelected="isSelected" @click-tag="isSelected = $event" />
       <h2>{{ selectedTag }}</h2>
       <div v-for="(post, index) in posts" class="post">
-        <span>{{ date(post.frontmatter.date) }}</span>
-        <a :href="post.regularPath"><h3>{{ post.title }}</h3></a>
-        <p>{{ post.frontmatter.description }}</p>
+        <a :href="post.regularPath">
+          <div class="post_title">
+            <span class="date">{{ date(post.frontmatter.date) }}</span>
+            <p class="title">{{ post.title }}</p>
+          </div>
+          <p>{{ post.frontmatter.description }}</p>
+        </a>
       </div>
     </div>
 
@@ -68,20 +72,13 @@ export default {
   data() {
     return {
       posts: [],
-      selectedTag: '# posts'
+      selectedTag: '# posts',
+      isSelected: '',
     }
   },
 
   mounted() {
-    this.posts = this.$site.pages.filter(post => {
-      let filename = post.relativePath.match(/([^/]+)\./)[1];
-      return filename != 'README';
-      })
-      .sort(function(a, b) {
-        if(a.frontmatter.date < b.frontmatter.date) return 1;
-        if(a.frontmatter.date > b.frontmatter.date) return -1;
-        return 0;
-      }); 
+    this.posts = this.getAllPosts();
   },
 
   computed: {
@@ -111,23 +108,56 @@ export default {
         this.posts = value;
       }
     },
+
+    allPosts() {
+      return this.getAllPosts();
+    }
   },
 
   methods: {
-    filter (value, index) {
-      this.selectedTag = '# ' + index;
+    filter (value, index = '') {
+      if (index == '') {
+        this.isSelected = '';
+        this.selectedTag = '# posts';
+      } else {
+        this.selectedTag = '# ' + index;
+      }
       this.$set(this, 'posts', value);
     },
+
+    getAllPosts() {
+      return this.$site.pages.filter(post => {
+        let filename = post.relativePath.match(/([^/]+)\./)[1];
+        return filename != 'README';
+        })
+        .sort(function(a, b) {
+          if(a.frontmatter.date < b.frontmatter.date) return 1;
+          if(a.frontmatter.date > b.frontmatter.date) return -1;
+          return 0;
+      }); 
+    }
   }
 }
 </script>
 
 <style lang="stylus">
 .post
-  padding 1rem 0
-  h3 
-    font-size: 1.2em
+  padding 2rem 0
+  a:hover
+    text-decoration none !important
+    color black
+  a
+    color #666
+  .post_title
+    margin 0px
+    font-size 1.1rem
     word-break break-all
+    .title
+      font-weight 600
+    .date
+      display block
+      text-align left
+      font-size 0.9rem
 .home
   padding $navbarHeight 2rem 0
   max-width $homePageWidth
