@@ -1,18 +1,23 @@
 const fs = require('fs');
 const path = require('path');
 
-var dirpath = "./docs";
-var exclude = ["about"];
-var dirs = fs.readdirSync(dirpath).filter((f) => {
+const dirpath = "./docs";
+const exclude = ["about"];
+const dirs = fs.readdirSync(dirpath).filter((f) => {
   return fs.existsSync(dirpath + "/" + f)
     && fs.statSync(dirpath + "/" + f).isDirectory()
     && !f.startsWith('.')
     && !exclude.includes(f);
 })
-var sidebarArray = dirs.map((dir) => {
-    var childrenArr = fs.readdirSync(dirpath + "/" + dir).map((childDir) => {
+
+// 並び順
+const order = ["frontend", "backend", "daily"];
+dirs.sort((x, y) => { return order.indexOf(x) - order.indexOf(y) });
+
+const sidebarArray = dirs.map((dir) => {
+    const childrenArr = fs.readdirSync(dirpath + "/" + dir).map((childDir) => {
       // ファイル名の取得
-      var base = new String(childDir).substring(childDir.lastIndexOf('/') + 1);
+      let base = new String(childDir).substring(childDir.lastIndexOf('/') + 1);
       if (base.lastIndexOf(".") != -1) {
         base = base.substring(0, base.lastIndexOf("."));
       }
